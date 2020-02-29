@@ -11,7 +11,7 @@
           aria-label="Menu"
         />
         <q-toolbar-title>
-          Testy
+          <span class="text-weight-bold">Testy</span> Pletform
           <q-badge outline align="middle" color="white">
             v1.0.0
           </q-badge>
@@ -83,18 +83,7 @@
       <q-expansion-item icon="settings" label="平台管理" >
         <q-card>
           <q-card-section>
-            <q-item
-              clickable
-              v-ripple
-              to="/manage"
-              active-class="my-menu-link"
-            >
-              <q-item-section avatar>
-                <q-icon name="supervised_user_circle" />
-              </q-item-section>
-
-              <q-item-section>用户管理</q-item-section>
-            </q-item>
+            <EssentialLink v-for="(item,index) in manage" :key="index" :item='item' />
           </q-card-section>
         </q-card>
       </q-expansion-item>
@@ -108,12 +97,28 @@
 </template>
 
 <script>
+import EssentialLink from 'components/EssentialLink.vue'
 export default {
   name: 'MainLayout',
+  components: {
+    EssentialLink
+  },
   data () {
     return {
       leftDrawerOpen: false,
-      text: ''
+      text: '',
+      manage: [
+        {
+          title: '用户管理',
+          link: '/usermanage',
+          icon: 'supervised_user_circle'
+        },
+        {
+          title: '部门管理',
+          link: '/deptmanage',
+          icon: 'deck'
+        }
+      ]
     }
   }
 }
@@ -121,5 +126,5 @@ export default {
 <style lang="sass" scoped>
 .my-menu-link
   color: white
-  background: #F2C037
+  background: #79bac1
 </style>
